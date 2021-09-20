@@ -1,24 +1,27 @@
 {
-    "name": ":vendor_slug/:package_slug",
+    "name": "fredattack/support-tickets-notifications",
     "description": ":package_description",
     "keywords": [
-        ":vendor_name",
+        "fredattack",
         "laravel",
-        ":package_slug"
+        "support-tickets-notifications",
+        "slack",
+        "sms"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/fredattack/support-tickets-notifications.git",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Fred Moras",
+            "email": "fred.moras@addf.be",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^7.4",
         "spatie/laravel-package-tools": "^1.4.3",
-        "illuminate/contracts": "^8.37"
+        "illuminate/contracts": "^8.37",
+        "bensampo/laravel-enum": "^3.4"
     },
     "require-dev": {
         "nunomaduro/collision": "^5.3",
@@ -30,13 +33,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Fredattack\\SupportTicketsNotifications": "src",
+            "Fredattack\\SupportTicketsNotifications\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Fredattack\\SupportTicketsNotifications\\Tests\\": "tests"
         }
     },
     "scripts": {
