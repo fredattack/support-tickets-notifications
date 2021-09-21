@@ -5,7 +5,7 @@
     use Illuminate\Support\Facades\Route;
     
     Route ::macro ( 'sutino' , function ( $prefix ) {
-        Route ::prefix ( $prefix ) -> group ( function () {
+        Route ::prefix ( $prefix )->middleware ( "auth")-> group ( function () {
             Route ::get ( '/' , RenderSupportController::class );
             
             Route ::get ( '/ticket' , GetTicketsController::class );
