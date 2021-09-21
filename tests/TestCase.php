@@ -1,26 +1,28 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Fredattack\SupportTicketsNotifications\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Route;
 use Orchestra\Testbench\TestCase as Orchestra;
-use VendorName\Skeleton\SkeletonServiceProvider;
+use Fredattack\SupportTicketsNotifications\SupportTicketsNotificationsServiceProvider;
 
 class TestCase extends Orchestra
 {
     protected function setUp(): void
     {
         parent::setUp();
-
+        Route::sutino('support-tickets');
+        
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'VendorName\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Fredattack\\SupportTicketsNotifications\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            SkeletonServiceProvider::class,
+            SupportTicketsNotificationsServiceProvider::class,
         ];
     }
 
@@ -28,9 +30,9 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
+    
+        $migration = include __DIR__.'/../database/migrations/create_support-tickets-notifications_table.php.stub';
         $migration->up();
-        */
+        
     }
 }

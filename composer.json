@@ -1,6 +1,6 @@
 {
     "name": "fredattack/support-tickets-notifications",
-    "description": ":package_description",
+    "description": "This is my package support-tickets-notifications",
     "keywords": [
         "fredattack",
         "laravel",
@@ -18,10 +18,11 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^7.4|^8.0",
         "spatie/laravel-package-tools": "^1.4.3",
         "illuminate/contracts": "^8.37",
-        "bensampo/laravel-enum": "^3.4"
+        "bensampo/laravel-enum": "^3.4",
+        "spatie/laravel-medialibrary": "^8.0.0"
     },
     "require-dev": {
         "nunomaduro/collision": "^5.3",
@@ -33,7 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Fredattack\\SupportTicketsNotifications": "src",
+            "Fredattack\\SupportTicketsNotifications\\": "src",
             "Fredattack\\SupportTicketsNotifications\\Database\\Factories\\": "database/factories"
         }
     },
@@ -52,10 +53,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Fredattack\\SupportTicketsNotifications\\SupportTicketsNotificationsServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\SkeletonFacade"
+                "SupportTicketsNotifications": "Fredattack\\SupportTicketsNotifications\\SupportTicketsNotificationsFacade"
             }
         }
     },
