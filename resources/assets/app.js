@@ -6,29 +6,44 @@
 
 require('./bootstrap');
 
+import {createApp} from 'vue'
+import App from './components/App'
+import router from './router'
+import VueEasyLightbox from 'vue-easy-lightbox'
 
 
 
-window.Vue = require('vue').default;
-window.Vue.config.productionTip = false
 
-import VueToasted from 'vue-toasted';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheck, faTimes,faSortAlphaUp,faSortAlphaDown,faTrash,faFilter,faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-import vSelect from 'vue-select'
-
-
-library.add(faCheck, faTimes,faSortAlphaUp,faSortAlphaDown,faTrash,faFilter,faSearch)
-
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-Vue.component('v-select', vSelect)
-Vue.use(VueToasted)
-
-Vue.component('main-component', require('./components/MainComponent.vue').default);
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { fas } from '@fortawesome/free-solid-svg-icons'
+library.add(fas);
+import { fab } from '@fortawesome/free-brands-svg-icons';
+library.add(fab);
+import { far } from '@fortawesome/free-regular-svg-icons';
+library.add(far);
+import { dom } from "@fortawesome/fontawesome-svg-core";
+dom.watch();
 
 
-const app = new Vue({
-    el: '#app',
-});
+
+// library.add(faCheck, faTimes,faSortAlphaUp,faSortAlphaDown,faTrash,faFilter,faSearch)
+// import i18n from "./i18n";
+// import store from './store'
+
+
+
+const app = createApp(App)
+    // .use(i18n)
+    // .use(store)
+    .use(router)
+    .use(library)
+    .use(FontAwesomeIcon)
+    .use(VueEasyLightbox)
+    // .use(AudioRecorder)
+
+
+
+
+app.component("font-awesome-icon", FontAwesomeIcon);
+app.mount('#app')

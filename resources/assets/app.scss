@@ -1,0 +1,32 @@
+header{
+  min-height: 4rem;
+}
+#app,.bg-aliceblue{
+  background: aliceblue !important;
+}
+
+.bd-navbar,.bg-info-light{
+background: #b5e1e8 !important;
+}
+.list-group-item,.bg-grey-light{
+background: #eeeeee !important;
+}
+.bd-sidebar{
+  height: calc(100vh - 4rem);
+  border-right: 1px solid rgba(0,0,0,.1);
+  color: dimgrey;
+}
+
+.card-message{
+  max-width: 30vw;
+  padding: 5px 10px;
+}
+.new-message-block{
+  //background: rgb(210, 210, 210) !important;
+  margin-bottom: 10px;
+  padding: 10px 10px 0 10px;
+}
+
+.author-infos{
+  font-size: 75%!important;
+}
