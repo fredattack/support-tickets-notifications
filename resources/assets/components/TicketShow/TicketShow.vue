@@ -1,6 +1,6 @@
 <template>
   <section>
-    <block-ticket-component :ticket="ticket"/>
+    <block-ticket-component :ticket="ticket" @setTicket-closed="handleTicketClosed"/>
 
     <message-list-component :messages="ticket.messages"/>
 
@@ -23,7 +23,6 @@ export default {
     }
   },
   mounted() {
-    // console.log('id', this.$props.id)
     this.fetchTicket()
   },
   methods: {
@@ -47,8 +46,19 @@ export default {
         console.error('errorr', response)
       })
 
-    }
+    },
+    handleTicketClosed: async function (message) {
+      console.log('message',message)
+      await  axios.get(`/api/set-ticket-closed/${this.$props.id}`).then(({response}) => {
+        console.log(response)
+        this.fetchTicket()
+      }).catch(({response}) => {
+        this.errors = response.data.errors
+        console.log('!!!!!!!!!!! error !!!!!!!!!!')
+        console.error('errorr', response)
+      })
 
+    }
 
   }
 }

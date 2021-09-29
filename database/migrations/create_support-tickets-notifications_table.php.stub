@@ -16,7 +16,7 @@
 
                 $table -> integer ( 'priority' ) ->default ( 3 );
                 $table -> enum ( 'type' , [ 'fixe' , 'help' , 'feature' ] ) ->default ( 'help' );
-                $table -> enum ( 'status' , [ 'open' , 'closed'] ) ->default ( 'open' );
+                $table -> enum ( 'status' , [ 'open', 'in progress', 'closed'] ) ->default ( 'open' );
                 $table->unsignedBigInteger('author_id');
                 // add fields
 

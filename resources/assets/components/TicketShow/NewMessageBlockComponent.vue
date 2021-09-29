@@ -5,15 +5,10 @@
         <textarea class="form-control bg-aliceblue border-0"
                   placeholder="Your message here..."
                   rows="6" v-model="message.text"></textarea>
-    </div> <div class="row col-10 offset-1 my-2">
-    <div class="col-auto">
-      <ul v-if="message.attachments">
-        <li v-for=" attachment in message.attachments" :key="attachment.name" >
-          {{ attachment.name }}
-        </li>
-
-      </ul>
     </div>
+    <div class="row col-10 offset-1 my-2">
+      <new-attachments-list-component :message="message"
+                                      @remove-attachment="handelRemoveAttachment"/>
       <submit-button-group-component :voice-recording="true"
                                      @pass-attachment="addAttachments"
                                      @process-submit="postMessage"/>
@@ -22,10 +17,11 @@
 </template>
 <script>
 import SubmitButtonGroupComponent from "./SubmitButtonGroupComponent";
+import NewAttachmentsListComponent from "./NewAttachmentsListComponent";
 
 export default {
   name: 'new-message-block-component',
-  components: {SubmitButtonGroupComponent},
+  components: {NewAttachmentsListComponent, SubmitButtonGroupComponent},
   data() {
     return {
       message: {
@@ -43,8 +39,10 @@ export default {
     async  addAttachments(attachment) {
       console.log('message  attachment',attachment)
 
+
       let new_file = {
-        name:attachment.name,
+        name: attachment.type === 'audio/webm' ? `voice_recording_${Date.now()}.webm`: attachment.name,
+        type: attachment.type,
         base64: await this.getBase64(attachment)
       };
       this.message.attachments.push(new_file)
@@ -65,6 +63,10 @@ export default {
         };
       });
     },
+    handelRemoveAttachment(deletable_attachment){
+      this.message.attachments.splice(this.message.attachments.findIndex(el => el.name === deletable_attachment.name), 1);
+    }
   },
+
 }
 </script>

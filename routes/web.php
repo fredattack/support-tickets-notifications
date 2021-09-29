@@ -3,6 +3,7 @@
     use Fredattack\SupportTicketsNotifications\Http\Controllers\GetTicketController;
     use Fredattack\SupportTicketsNotifications\Http\Controllers\GetTicketListController;
     use Fredattack\SupportTicketsNotifications\Http\Controllers\RenderSupportController;
+    use Fredattack\SupportTicketsNotifications\Http\Controllers\SetTicketClosedController;
     use Fredattack\SupportTicketsNotifications\Http\Controllers\StoreMessageController;
     use Fredattack\SupportTicketsNotifications\Http\Controllers\StoreTicketController;
     use Illuminate\Support\Facades\Route;
@@ -15,6 +16,7 @@
             Route ::get ( '/ticket' , GetTicketListController::class );
             Route ::post ( '/ticket' , StoreTicketController::class );
             Route ::post ( '/message/{ticket}' , StoreMessageController::class );
+            Route ::get ( '/set-ticket-closed/{ticket}' , SetTicketClosedController::class );
             Route ::get ( '/ticket/{ticket}' , GetTicketController::class );
         } );
     } );

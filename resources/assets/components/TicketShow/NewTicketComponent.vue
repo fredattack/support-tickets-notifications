@@ -70,30 +70,25 @@
       </div>
       <div class="row col-10 offset-1 my-2">
           <p class="text-danger" v-if="errors.attachments" v-for="error in errors.attachments"><small>{{ error }}</small></p>
-        <div class="col-auto">
-          <ul v-if="ticket.attachments">
-            <li :key="attachment.name" v-for=" attachment in ticket.attachments">
-              {{ attachment.name }}
-            </li>
-
-          </ul>
-        </div>
+        <new-attachments-list-component :message="ticket"
+                                        @remove-attachment="handelRemoveAttachment"/>
       </div>
     </div>
     <submit-button-group-component
-        :voice-recording="false"
+        :voice-recording="true"
         @pass-attachment="addAttachments"
         @process-submit="postTicket"
     />
   </div>
 </template>
 <script>
+import NewAttachmentsListComponent from "./NewAttachmentsListComponent";
 import SubmitButtonGroupComponent from "./SubmitButtonGroupComponent";
 
 export default {
 
   name: 'new-ticket-component',
-  components: {SubmitButtonGroupComponent},
+  components: {SubmitButtonGroupComponent,NewAttachmentsListComponent},
   data() {
     return {
       ticket: {
@@ -116,6 +111,7 @@ export default {
       this.errors = []
       let new_file = {
         name: attachment.name,
+        type: attachment.type,
         base64: await this.getBase64(attachment)
       };
       this.ticket.attachments.push(new_file)
@@ -146,7 +142,11 @@ export default {
         console.log('!!!!!!!!!!! error !!!!!!!!!!')
         console.error('errorr', response)
       })
+    },
+    handelRemoveAttachment(deletable_attachment){
+      this.ticket.attachments.splice(this.ticket.attachments.findIndex(el => el.name === deletable_attachment.name), 1);
     }
+
   },
   mounted() {
     // console.log('mounted test-component')

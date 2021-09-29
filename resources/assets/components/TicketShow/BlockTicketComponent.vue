@@ -1,12 +1,17 @@
 <template>
   <div class="col-12 col-md-10 offset-md-1 border p-3 pb-6 my-5">
-    <div class="row justify-content-end mr-5" v-if="ticket.status === 'open' ">
-      <button type="button" class="btn btn-outline-secondary" disabled v-if="read"><i class="far fa-eye"></i></button>
-      <button type="button" class="btn btn-outline-secondary" disabled v-else><i class="far fa-eye-slash"></i></button>
+
+    <div class="row justify-content-end mr-5" >
+      <div class="btn-group">
+        <button type="button" class="btn " :class="status_color" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+          {{ticket.status}}
+        </button>
+        <div class="dropdown-menu " v-if="status !== 'closed' ">
+          <a class="dropdown-item" href="#" @click="setTicketClosed">closed</a>
+        </div>
+      </div>
     </div>
-    <div class="row justify-content-end mr-5" v-if="ticket.status === 'closed' ">
-      <button type="button" class="btn btn-outline-danger" disabled>closed</button>
-    </div>
+
     <h3>{{ ticket.title }}</h3>
     <hr>
     <div class="col-10 offset-1">
@@ -48,11 +53,28 @@ export default {
   components: {AttachmentListComponent},
   data() {
     return {
-      read: true
+      read: true,
     }
+  },
+
+  computed: {
+    status(){
+      return this.ticket.status
+    },
+    status_color() {
+      if (this.status === 'open' )  return "btn-primary dropdown-toggle"
+      if (this.status === 'closed' ) return "btn-danger"
+      if (this.status === 'in progress' ) return "btn-warning dropdown-toggle"
+
+    },
   },
   props: {
     ticket: {}
-  }
+  },
+  methods: {
+    setTicketClosed() {
+    this.$emit('setTicket-closed')
+    }
+  },
 }
 </script>

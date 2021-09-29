@@ -32,7 +32,7 @@
         public function rules ()
         {
             return [
-                'text' => ['required','string'] ,
+                'text' => [Rule::requiredIf(!request()->has('attachments')),'string','nullable'] ,
                 'author_id' => ['required'] ,
                
                 

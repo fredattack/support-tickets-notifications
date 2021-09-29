@@ -11,11 +11,32 @@
     {
        public function __invoke (TicketSupport $ticket)
        {
+    
+           $this -> setTicketInProgress ( $ticket );
+    
+           $this -> markTicketRead ( $ticket );
+           
            $ticket->load(['author','messages','messages.author','messages.media','media']);
            
-           $ticket->readers()->syncWithoutDetaching([\Auth::id ()]);
-           $ticket->messages()->each(fn ($message)=> $message->readers()->syncWithoutDetaching([\Auth::id ()]));
-//           ray($ticket->getMedia ('attachment')[0]->getFullUrl());
+           $this -> markMessagesRead ( $ticket );
+           
            return \Response::json ( ['data'=>$ticket] );
        }
+    
+        public function setTicketInProgress ( TicketSupport $ticket ) : void
+        {
+            if ( \Auth ::user () -> hasRole ( 'super-admin' ) && $ticket -> status === 'open' ) {
+                $ticket -> update ( [ 'status' => 'in progress' ] );
+            }
+        }
+    
+        public function markTicketRead ( TicketSupport $ticket ) : void
+        {
+            $ticket -> readers () -> syncWithoutDetaching ( [ \Auth ::id () ] );
+        }
+    
+        public function markMessagesRead ( TicketSupport $ticket ) : void
+        {
+            $ticket -> messages () -> each ( fn ( $message ) => $message -> readers () -> syncWithoutDetaching ( [ \Auth ::id () ] ) );
+        }
     }
