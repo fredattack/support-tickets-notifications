@@ -4,7 +4,7 @@
 
     <message-list-component :messages="ticket.messages"/>
 
-    <new-message-block-component @submit-message="submitMessage" v-if="ticket.status === 'open' "/>
+    <new-message-block-component @submit-message="submitMessage" v-if="['open' ,'in progress'].includes(ticket.status ) "/>
   </section>
 </template>
 
@@ -25,12 +25,13 @@ export default {
   mounted() {
     this.fetchTicket()
   },
+
   methods: {
     fetchTicket: async function () {
       await axios.get(`/api/ticket/${this.$props.id}`).then(({data}) => {
         console.log('ticket', data)
-        this.ticket = data.data
-
+        this.ticket = data.ticket
+        this.$store.dispatch('insertAuth', data.auth)
       }).catch(({response}) => {
         console.error('error', response)
       })
@@ -48,7 +49,7 @@ export default {
 
     },
     handleTicketClosed: async function (message) {
-      console.log('message',message)
+
       await  axios.get(`/api/set-ticket-closed/${this.$props.id}`).then(({response}) => {
         console.log(response)
         this.fetchTicket()

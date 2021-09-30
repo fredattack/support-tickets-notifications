@@ -13,11 +13,11 @@
        {
     
            $collection = TicketSupport::with(['messages','author'])
-               ->when(request('active') === 'true',fn ($q)=> $q->where('status','open'))
+               ->when(request('active') === 'true',fn ($q)=> $q->whereIn('status',['open','in progress']))
                ->when(request('active') !== 'true',fn ($q)=> $q->where('status','closed'))
                ->latest ('updated_at')
                -> get ();
            
-           return \Response::json ( ['data'=> $collection ] );
+           return \Response::json ( ['tickets'=>$collection,'auth'=>\Auth::user ()]  );
        }
     }

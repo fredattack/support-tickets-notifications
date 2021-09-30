@@ -10,8 +10,8 @@
         <th><i class="fa fa-comment-alt"></i></th>
       </tr>
       </thead>
-      <tbody v-if="ticketsList && ticketsList.data">
-        <tr v-for="(ticket,index) in ticketsList.data" :key="index" class="ticket-block">
+      <tbody v-if="ticketsList && ticketsList.length">
+        <tr v-for="(ticket,index) in ticketsList" :key="index" class="ticket-block">
           <td @click="showTicket(ticket.id)">
             <div class="row justify-content-center">
               <a href="#" class="text-decoration-none text-body text-capitalize align-self-center"><h6>
@@ -43,7 +43,7 @@ export default {
   name: "TicketList",
   data() {
     return {
-      ticketsList: {},
+      ticketsList: [],
       ticket_count: 0
     }
   },
@@ -58,9 +58,12 @@ export default {
     fetchTickets: async function () {
       const active = this.$route.name !== 'archived';
       await axios.get(`/api/ticket?active=${active}`).then(({data}) => {
-        console.log('data', data)
-        this.ticketsList = data
-        this.ticket_count = data.total
+        console.log('data ...', data)
+        console.log('tickets ...', data.tickets)
+        console.log('auth ...', data.auth)
+        this.ticketsList = data.tickets
+        this.ticket_count = data.tickets.total
+        this.$store.dispatch('insertAuth', data.auth)
       }).catch(({response}) => {
         console.error('test', response)
       })

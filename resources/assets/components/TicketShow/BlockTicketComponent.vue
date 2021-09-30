@@ -1,12 +1,14 @@
 <template>
   <div class="col-12 col-md-10 offset-md-1 border p-3 pb-6 my-5">
-
-    <div class="row justify-content-end mr-5" >
+    <!--{{auth.role}}-->
+    <div class="row justify-content-end mr-5">
       <div class="btn-group">
-        <button type="button" class="btn " :class="status_color" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-          {{ticket.status}}
+
+        <button type="button" class="btn " :class="status_color" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+          {{ ticket.status }}
         </button>
-        <div class="dropdown-menu " v-if="status !== 'closed' ">
+        <div class="dropdown-menu " v-if="status !== 'closed' && auth.role === 'super-admin' ">
           <a class="dropdown-item" href="#" @click="setTicketClosed">closed</a>
         </div>
       </div>
@@ -28,7 +30,8 @@
       </div>
       <div class="col-4 ">
         <div class="row justify-content-center">
-          <p class="text-muted">Priority: <span v-for=" n in ticket.priority">  <i class="fas fa-exclamation mx-2 "></i> </span></p>
+          <p class="text-muted">Priority: <span v-for=" n in ticket.priority">  <i class="fas fa-exclamation mx-2 "></i> </span>
+          </p>
         </div>
       </div>
       <div class="col-4 ">
@@ -47,6 +50,7 @@
 </template>
 <script>
 import AttachmentListComponent from "./AttachmentListComponent";
+import {mapState} from 'vuex'
 
 export default {
   name: 'block-ticket-component',
@@ -56,15 +60,16 @@ export default {
       read: true,
     }
   },
-
   computed: {
-    status(){
+    role(){ return this.$store.auth.role },
+    ...mapState(['auth']),
+    status() {
       return this.ticket.status
     },
     status_color() {
-      if (this.status === 'open' )  return "btn-primary dropdown-toggle"
-      if (this.status === 'closed' ) return "btn-danger"
-      if (this.status === 'in progress' ) return "btn-warning dropdown-toggle"
+      if (this.status === 'open') return "btn-primary dropdown-toggle"
+      if (this.status === 'closed') return "btn-danger"
+      if (this.status === 'in progress') return "btn-warning dropdown-toggle"
 
     },
   },
@@ -73,7 +78,7 @@ export default {
   },
   methods: {
     setTicketClosed() {
-    this.$emit('setTicket-closed')
+      this.$emit('setTicket-closed')
     }
   },
 }

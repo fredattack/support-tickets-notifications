@@ -9,6 +9,7 @@ require('./bootstrap');
 import {createApp} from 'vue'
 import App from './components/App'
 import router from './router'
+import store from './store'
 import VueEasyLightbox from 'vue-easy-lightbox'
 
 
@@ -35,7 +36,7 @@ dom.watch();
 
 const app = createApp(App)
     // .use(i18n)
-    // .use(store)
+    .use(store)
     .use(router)
     .use(library)
     .use(FontAwesomeIcon)

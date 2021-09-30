@@ -20,7 +20,7 @@
            
            $this -> markMessagesRead ( $ticket );
            
-           return \Response::json ( ['data'=>$ticket] );
+           return \Response::json ( ['ticket'=>$ticket,'auth'=>\Auth::user ()] );
        }
     
         public function setTicketInProgress ( TicketSupport $ticket ) : void
