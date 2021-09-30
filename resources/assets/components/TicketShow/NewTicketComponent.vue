@@ -110,7 +110,7 @@ export default {
       }
       this.errors = []
       let new_file = {
-        name: attachment.name,
+        name: attachment.type === 'audio/webm' ? `voice_recording_${Date.now()}.webm`: attachment.name,
         type: attachment.type,
         base64: await this.getBase64(attachment)
       };

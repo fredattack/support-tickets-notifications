@@ -106,7 +106,7 @@ export default {
           , timeElapsed = new Date(currentTime - this.startTime )
           , min = timeElapsed.getUTCMinutes()
           , sec = timeElapsed.getUTCSeconds()
- console.log('timeelapsed',timeElapsed);
+
 
       this.record_duration =
           this.zeroPrefix(min, 2) + ":" +

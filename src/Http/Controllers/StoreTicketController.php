@@ -2,6 +2,7 @@
 
     namespace Fredattack\SupportTicketsNotifications\Http\Controllers;
 
+    use Fredattack\SupportTicketsNotifications\Events\TicketCreated;
     use Fredattack\SupportTicketsNotifications\Http\FormRequest\StoreTicketRequest;
     use Fredattack\SupportTicketsNotifications\Models\TicketSupport;
     use Illuminate\Routing\Controller;
@@ -21,7 +22,8 @@
                             -> toMediaCollection('attachments');
                 }
             }
-
+            event ( new TicketCreated($ticket));
+            
             return \Response ::json([ 'data' => $ticket -> load([ 'author' , 'messages' , 'messages.author' ]) ], 201);
         }
     }

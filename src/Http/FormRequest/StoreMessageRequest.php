@@ -3,6 +3,7 @@
     namespace Fredattack\SupportTicketsNotifications\Http\FormRequest;
 
     use Illuminate\Foundation\Http\FormRequest;
+    use Illuminate\Validation\Rule;
 
     class StoreMessageRequest extends FormRequest
     {
@@ -29,9 +30,6 @@
             return [
                 'text' => [Rule::requiredIf(!request()->has('attachments')),'string','nullable'] ,
                 'author_id' => ['required'] ,
-
-
-
             ];
         }
     }

@@ -53,7 +53,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Fredattack\\SupportTicketsNotifications\\SupportTicketsNotificationsServiceProvider"
+                "Fredattack\\SupportTicketsNotifications\\SupportTicketsNotificationsServiceProvider",
+                "Fredattack\\SupportTicketsNotifications\\EventServiceProvider"
             ],
             "aliases": {
                 "SupportTicketsNotifications": "Fredattack\\SupportTicketsNotifications\\SupportTicketsNotificationsFacade"

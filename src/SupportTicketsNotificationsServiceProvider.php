@@ -24,4 +24,12 @@ class SupportTicketsNotificationsServiceProvider extends PackageServiceProvider
             ->hasMigration('create_support-tickets-notifications_table')
             ->hasCommand(SupportTicketsNotificationsCommand::class);
     }
+    
+    public function register (  )
+    {
+        parent ::register () ;
+        $this->app->register(EventServiceProvider::class);
+    }
+
+
 }
