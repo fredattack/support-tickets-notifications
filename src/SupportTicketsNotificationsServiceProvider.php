@@ -2,9 +2,9 @@
 
 namespace Fredattack\SupportTicketsNotifications;
 
+use Fredattack\SupportTicketsNotifications\Commands\SupportTicketsNotificationsCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Fredattack\SupportTicketsNotifications\Commands\SupportTicketsNotificationsCommand;
 
 class SupportTicketsNotificationsServiceProvider extends PackageServiceProvider
 {
