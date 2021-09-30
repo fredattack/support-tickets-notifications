@@ -27,7 +27,7 @@
         public function rules()
         {
             return [
-                'text' => [Rule::requiredIf(!request()->has('attachments')),'string','nullable'] ,
+                'text' => [Rule::requiredIf(! request()->has('attachments')),'string','nullable'] ,
                 'author_id' => ['required'] ,
 
 
