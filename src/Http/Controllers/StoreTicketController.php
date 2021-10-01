@@ -22,8 +22,8 @@
                             -> toMediaCollection('attachments');
                 }
             }
-            event ( new TicketCreated($ticket));
-            
+            event(new TicketCreated($ticket));
+
             return \Response ::json([ 'data' => $ticket -> load([ 'author' , 'messages' , 'messages.author' ]) ], 201);
         }
     }

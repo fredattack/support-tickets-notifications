@@ -1,12 +1,11 @@
 <?php
-    
+
     namespace Fredattack\SupportTicketsNotifications;
-    
+
     use Fredattack\SupportTicketsNotifications\Events\TicketCreated;
     use Fredattack\SupportTicketsNotifications\Listeners\NotifyADDFTeam;
     use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
-    
     class EventServiceProvider extends ServiceProvider
     {
         protected $listen = [
@@ -14,14 +13,14 @@
                 NotifyADDFTeam::class ,
             ],
         ];
-        
+
         /**
          * Register any events for your application.
          *
          * @return void
          */
-        public function boot () : void
+        public function boot(): void
         {
-            parent ::boot ();
+            parent ::boot();
         }
     }
