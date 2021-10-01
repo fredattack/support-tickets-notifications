@@ -21,9 +21,10 @@
         "php": "^7.4|^8.0",
         "bensampo/laravel-enum": "^3.4",
         "illuminate/contracts": "^8.37",
+        "laravel/slack-notification-channel": "^2.3",
         "spatie/laravel-medialibrary": "^8.0.0",
         "spatie/laravel-package-tools": "^1.4.3",
-        "spatie/laravel-ray": "^1.26"
+        "spatie/laravel-ray": "^1.25.2"
     },
     "require-dev": {
         "nunomaduro/collision": "^5.3",
