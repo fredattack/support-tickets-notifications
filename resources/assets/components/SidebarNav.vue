@@ -11,9 +11,9 @@
       <router-link :to="{name:'archived'}" class="list-group-item">
         <span class="hidden-sm-down text-dark"><i class="fa fa-archive"></i>&nbsp;{{ t('archived')}}</span>
       </router-link>
-      <router-link :to="{name:'features-list'}" class="list-group-item">
-        <span class="hidden-sm-down text-dark"><i class="fa fa-clipboard-list"></i>&nbsp;{{ t('new_function')}}</span>
-      </router-link>
+<!--      <router-link :to="{name:'features-list'}" class="list-group-item">-->
+<!--        <span class="hidden-sm-down text-dark"><i class="fa fa-clipboard-list"></i>&nbsp;{{ t('new_function')}}</span>-->
+<!--      </router-link>-->
 
     </div>
   </nav>
