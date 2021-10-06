@@ -1,14 +1,15 @@
 <template>
-  <div class="border my-5 p-3">
+  <div class="border my-md-5 p-md-3">
     <div class="col-12 col-md-10 offset-md-1">
       <div class="form-group">
-        <label for="title-input">Title</label>
+        <label for="title-input">{{ t('title') }}</label>
         <input type="text" class="form-control" id="title-input" v-model.trim="ticket.title">
         <p class="text-danger" v-if="errors.title" v-for="error in errors.title"><small>{{ error }}</small></p>
       </div>
       <div class="form-group">
-        <label for="text-input">Description</label>
-        <textarea class="form-control" id="text-input" placeholder="your text here... "
+        <label for="text-input">{{ t('description') }}</label>
+        <textarea class="form-control" id="text-input"
+                  :placeholder="t('your_mess_here')"
                   v-model.trim="ticket.description"></textarea>
         <p class="text-danger" v-if="errors.description" v-for="error in errors.description"><small>{{ error }}</small>
         </p>
@@ -19,56 +20,57 @@
             <label for="title-input">Type</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="type" id="inlineRadio1" value="fixe"
+            <input class="form-check-input" type="radio" name="type" id="inlineRadio1"
+                   value="fixe"
                    v-model="ticket.type">
-            <label class="form-check-label" for="inlineRadio1">bug fixe</label>
+            <label class="form-check-label" for="inlineRadio1">{{ t('fixe') }}</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" v-model="ticket.type" checked name="type" id="inlineRadio2"
                    value="help">
-            <label class="form-check-label" for="inlineRadio2">help</label>
+            <label class="form-check-label" for="inlineRadio2">{{ t('help') }}</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" v-model="ticket.type" name="type" id="inlineRadio3"
                    value="feature">
-            <label class="form-check-label" for="inlineRadio3">new feature</label>
+            <label class="form-check-label" for="inlineRadio3">{{ t('feature') }}</label>
           </div>
           <p class="text-danger" v-if="errors.type" v-for="error in errors.type"><small>{{ error }}</small></p>
         </div>
 
         <div class="col-6" v-if="ticket.type !== 'fixe'">
           <div class="form-group">
-            <label for="title-input">Priority</label>
+            <label for="title-input">{{ t('priority') }}</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" v-model="ticket.priority" name="priority" id="priorityRadio1"
                    value="1">
-            <label class="form-check-label" for="priorityRadio1">1</label>
+            <label class="form-check-label" for="priorityRadio1">{{ t('priority_1') }}</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" v-model="ticket.priority" name="priority" id="priorityRadio2"
                    value="2">
-            <label class="form-check-label" for="priorityRadio2">2</label>
+            <label class="form-check-label" for="priorityRadio2">{{ t('priority_2') }}</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" v-model="ticket.priority" name="priority" id="priorityRadio3"
                    value="3">
-            <label class="form-check-label" for="priorityRadio3">3</label>
+            <label class="form-check-label" for="priorityRadio3">{{ t('priority_3') }}</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" v-model="ticket.priority" name="priority" id="priorityRadio4"
                    value="4">
-            <label class="form-check-label" for="priorityRadio4">4</label>
+            <label class="form-check-label" for="priorityRadio4">{{ t('priority_4') }}</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" v-model="ticket.priority" name="priority" id="priorityRadio5"
                    value="5">
-            <label class="form-check-label" for="priorityRadio5">5</label>
+            <label class="form-check-label" for="priorityRadio5">{{ t('priority_5') }}</label>
           </div>
           <p class="text-danger" v-if="errors.priority" v-for="error in errors.priority"><small>{{ error }}</small></p>
         </div>
       </div>
-      <div class="row col-10 offset-1 my-2">
+      <div class="row col-12 col-md-10 offset-md-1 my-md-2">
           <p class="text-danger" v-if="errors.attachments" v-for="error in errors.attachments"><small>{{ error }}</small></p>
         <new-attachments-list-component :message="ticket"
                                         @remove-attachment="handelRemoveAttachment"/>
@@ -84,15 +86,21 @@
 <script>
 import NewAttachmentsListComponent from "./NewAttachmentsListComponent";
 import SubmitButtonGroupComponent from "./SubmitButtonGroupComponent";
+import {useI18n} from "vue-i18n";
 
 export default {
 
   name: 'new-ticket-component',
   components: {SubmitButtonGroupComponent,NewAttachmentsListComponent},
+  setup() {
+    const {t, locale} = useI18n();
+    return {t, locale}
+  },
   data() {
     return {
       ticket: {
         type: 'help',
+        priority: 3,
         attachments: []
       },
       errors: []

@@ -6,14 +6,13 @@
 
         <button type="button" class="btn " :class="status_color" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
-          {{ ticket.status }}
+       {{ticket.status &&  t(ticket.status) }}
         </button>
         <div class="dropdown-menu " v-if="status !== 'closed' && auth.role === 'super-admin' ">
-          <a class="dropdown-item" href="#" @click="setTicketClosed">closed</a>
+          <a class="dropdown-item" href="#" @click="setTicketClosed">{{ t('closed') }}</a>
         </div>
       </div>
     </div>
-
     <h3>{{ ticket.title }}</h3>
     <hr>
     <div class="col-10 offset-1">
@@ -25,19 +24,19 @@
       <div class="col-4 ">
         <div class="row justify-content-center">
 
-          <h3><span class="badge badge-primary">{{ ticket.type }}</span></h3>
+          <h3><span class="badge badge-primary">{{ticket.type &&  t(ticket.type) }}</span></h3>
         </div>
       </div>
       <div class="col-4 ">
         <div class="row justify-content-center">
-          <p class="text-muted">Priority: <span v-for=" n in ticket.priority">  <i class="fas fa-exclamation mx-2 "></i> </span>
+          <p class="text-muted">{{t('priority')}}: <span v-for=" n in ticket.priority">  <i class="fas fa-exclamation mx-2 "></i> </span>
           </p>
         </div>
       </div>
       <div class="col-4 ">
         <div class="row justify-content-center">
-          <p v-if="ticket.author" class="text-muted ">Created on&nbsp;{{ ticket.created_at }}
-            <span>&nbsp;By&nbsp;{{ ticket.author.first_name }}</span></p>
+<!--          <p v-if="ticket.author" class="text-muted ">{{t('created_on')}}&nbsp;{{ ticket.created_at }}-->
+<!--            <span>&nbsp;{{t('by')}}&nbsp;{{ ticket.author.first_name }}</span></p>-->
         </div>
       </div>
     </div>
@@ -51,14 +50,20 @@
 <script>
 import AttachmentListComponent from "./AttachmentListComponent";
 import {mapState} from 'vuex'
+import {useI18n} from "vue-i18n";
 
 export default {
   name: 'block-ticket-component',
   components: {AttachmentListComponent},
   data() {
+
     return {
       read: true,
     }
+  },
+  setup() {
+    const {t, locale} = useI18n();
+    return {t, locale}
   },
   computed: {
     role(){ return this.$store.auth.role },

@@ -12,37 +12,43 @@ import router from './router'
 import store from './store'
 import VueEasyLightbox from 'vue-easy-lightbox'
 
+import {createI18n} from 'vue-i18n';
+import fr from '../lang/fr'
 
+import {dom, library} from "@fortawesome/fontawesome-svg-core";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {fas} from '@fortawesome/free-solid-svg-icons'
+import {fab} from '@fortawesome/free-brands-svg-icons';
+import {far} from '@fortawesome/free-regular-svg-icons';
 
-
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { fas } from '@fortawesome/free-solid-svg-icons'
 library.add(fas);
-import { fab } from '@fortawesome/free-brands-svg-icons';
 library.add(fab);
-import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(far);
-import { dom } from "@fortawesome/fontawesome-svg-core";
 dom.watch();
+// const { RayPlugin } = require('vue-ray');
 
-
-
-// library.add(faCheck, faTimes,faSortAlphaUp,faSortAlphaDown,faTrash,faFilter,faSearch)
-// import i18n from "./i18n";
-// import store from './store'
-
-
+const i18n = createI18n({
+    messages : {
+        fr:fr
+    },
+    fallbackLocale: 'fr',
+})
 
 const app = createApp(App)
-    // .use(i18n)
     .use(store)
     .use(router)
+    .use(i18n)
     .use(library)
     .use(FontAwesomeIcon)
     .use(VueEasyLightbox)
-    // .use(AudioRecorder)
-
+    // .use(RayPlugin, {
+    //     interceptErrors: true,
+    //     port: 23517,
+    //     showComponentEvents: ['created', 'mounted'],
+    //     nodeRaySettings: {
+    //         interceptConsoleLog: true,
+    //     },
+    // });
 
 
 

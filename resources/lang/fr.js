@@ -1,0 +1,26 @@
+export default {
+    ticket_list: 'Tickets en cours',
+    new_ticket: 'Nouv. Ticket',
+    new_function: 'Nouv. fonction',
+    archived: 'Tickets Archivés',
+    title: 'Titre',
+    description: 'Description',
+    author: 'Auteur',
+    priority:'Priorité',
+    priority_1: 'très faible',
+    priority_2: 'faible',
+    priority_3: 'moyenne',
+    priority_4: 'élevée',
+    priority_5: 'très élevée',
+    help: 'aide',
+    fixe: 'erreur',
+    feature: 'nouv. fonctionalité',
+    your_mess_here: 'Votre message ici ... ',
+    created_on:'Créé le',
+    by:'par',
+    open:'ouvert',
+    "in progress":'en cours',
+    closed:'terminé',
+    recording:'enregitrement'
+
+}

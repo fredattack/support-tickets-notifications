@@ -1,8 +1,13 @@
 
 @component('mail::message')
-boom
+# {{$ticket->title}}
+
+{{$ticket->description}}
 
 
+@component('mail::button', ['url' => url('/support-ticket/'.$ticket->id)])
+    Ticket
+@endcomponent
 
 
 @endcomponent

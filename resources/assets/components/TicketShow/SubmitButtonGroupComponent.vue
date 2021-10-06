@@ -1,7 +1,7 @@
 <template xmlns="http://www.w3.org/1999/html">
 
-  <div class="row col-10 offset-1 my-2">
-    <div class="col-auto">
+  <div class="row col-12 col-md-10 offset-md-1 my-md-2">
+    <div class="col-6 col-md-auto">
       <input type="file" ref="file" name="attachments[]" style="display: none" @change="addAttachment"
              accept=".mov,.mp3,.mp4,.png,.jpg,.jpeg">
       <button type="button" @click="selectFile()" class="btn btn-outline-secondary m-1"><i
@@ -15,14 +15,14 @@
         <i class="fas fa-stop"></i>
       </button>
     </div>
-    <div class="col-auto">
+    <div class="col-6 col-md-auto">
       <p v-if="recording" class="text-danger"><span class="spinner-grow spinner-grow-sm text-danger" role="status"
-                                                    aria-hidden="true"></span>&nbsp;recording... </p>
+                                                    aria-hidden="true"></span>&nbsp;{{ t('recording') }}... </p>
     </div>
-    <div class="col-auto">
+    <div class="col-6 ml-sm-auto col-md-auto">
       <p v-if="recording" class="text-danger"> {{ record_duration }} s.</p>
     </div>
-    <div class="col-auto ml-auto ">
+    <div class="col-md-auto ml-md-auto ">
 
       <button type="button" class="btn btn-primary m-1" @click="this.$emit('process-submit')"><i
           class="fas fa-paper-plane "></i></button>
@@ -32,8 +32,14 @@
 <script>
 
 
+import {useI18n} from "vue-i18n";
+
 export default {
   name: 'submit-button-group-component',
+  setup() {
+    const {t, locale} = useI18n();
+    return {t, locale}
+  },
   data() {
     return {
       interval : null,

@@ -1,12 +1,12 @@
 <template>
 
-  <div class="table-responsive col-10 offset-1 my-5">
+  <div class="table-responsive col-12 col-md-10 offset-md-1 my-5" >
     <table class="table table-bordered table-hover text-center">
       <thead>
       <tr>
-        <th>Title</th>
-        <th>description</th>
-        <th>Author</th>
+        <th>{{ t('title') }}</th>
+        <th>{{ t('description') }}</th>
+        <th>{{ t('author') }}</th>
         <th><i class="fa fa-comment-alt"></i></th>
       </tr>
       </thead>
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import {useI18n} from "vue-i18n"
 export default {
   name: "TicketList",
   data() {
@@ -47,8 +48,16 @@ export default {
       ticket_count: 0
     }
   },
+  setup() {
+    const {t, locale} = useI18n();
+    return {t, locale}
+  },
   mounted() {
     this.fetchTickets()
+  },
+  created() {
+    // this.$ray().data();
+    // this.$ray().track('ticketList');
   },
   watch: {
     // call again the method if the route changes

@@ -12,7 +12,7 @@ background: #b5e1e8 !important;
 background: #eeeeee !important;
 }
 .bd-sidebar{
-  height: calc(100vh - 4rem);
+  //height: calc(100vh - 4rem);
   border-right: 1px solid rgba(0,0,0,.1);
   color: dimgrey;
 }
@@ -29,4 +29,11 @@ background: #eeeeee !important;
 
 .author-infos{
   font-size: 75%!important;
+}
+
+@media screen and (min-width: 640px) {
+  .bd-sidebar{
+    height: calc(100vh - 4rem);
+
+  }
 }

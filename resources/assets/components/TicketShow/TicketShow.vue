@@ -24,6 +24,9 @@ export default {
   },
   mounted() {
     this.fetchTicket()
+    // this.$ray().data()
+    // this.$ray().props()
+
   },
 
   methods: {

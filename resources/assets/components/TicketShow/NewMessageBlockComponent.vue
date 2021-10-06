@@ -3,7 +3,7 @@
     <div class="card new-message-block bg-aliceblue border-0">
 
         <textarea class="form-control bg-aliceblue border-0"
-                  placeholder="Your message here..."
+                  :placeholder="t('your_mess_here')"
                   rows="6" v-model="message.text"></textarea>
     </div>
     <div class="row col-10 offset-1 my-2">
@@ -18,10 +18,15 @@
 <script>
 import SubmitButtonGroupComponent from "./SubmitButtonGroupComponent";
 import NewAttachmentsListComponent from "./NewAttachmentsListComponent";
+import {useI18n} from "vue-i18n";
 
 export default {
   name: 'new-message-block-component',
   components: {NewAttachmentsListComponent, SubmitButtonGroupComponent},
+  setup() {
+    const {t, locale} = useI18n();
+    return {t, locale}
+  },
   data() {
     return {
       message: {

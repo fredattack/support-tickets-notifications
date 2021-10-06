@@ -1,9 +1,9 @@
 <template>
-  <div class="col-auto">
-    <ul v-if="message.attachments" style="list-style: none">
+  <div class="col-12 col-md-auto">
+    <ul v-if="message.attachments" style="list-style: none" class="p-0 m-0">
       <li v-for="attachment in message.attachments" :key="attachment.name">
-        <div class="row">
-          <div class="col-10 justify-content-center">
+<!--        <div class="row">-->
+          <div class="col-10 justify-content-md-center p-sm-0 ">
             <display-image-component v-if=" this.IMAGE_TYPE.includes(attachment.type)"
                                      :url="attachment.base64" :name="attachment.name" :type="attachment.type"/>
 
@@ -19,7 +19,7 @@
               <i class="fas fa-times "></i>
             </button>
           </div>
-        </div>
+<!--        </div>-->
       </li>
 
     </ul>
