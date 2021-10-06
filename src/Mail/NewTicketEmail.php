@@ -19,6 +19,6 @@
         {
             return $this -> markdown('support-tickets-notifications::emails.newTicketMail')
                 -> with([ 'ticket' => $this -> ticket ])
-                -> subject('Nouveau ticket de '.Auth()->user () -> first_name .' - ' .config('app.name') );
+                -> subject('Nouveau ticket de '.Auth()->user() -> first_name .' - ' .config('app.name'));
         }
     }
