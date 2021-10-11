@@ -3,7 +3,6 @@
     <!--{{auth.role}}-->
     <div class="row justify-content-end mr-5">
       <div class="btn-group">
-
         <button type="button" class="btn " :class="status_color" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
        {{ticket.status &&  t(ticket.status) }}

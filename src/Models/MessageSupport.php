@@ -10,7 +10,7 @@
     {
         use InteractsWithMedia;
 
-        protected $guarded = [];
+        protected $guarded = ['id'];
 
         protected $casts = [
             'created_at' => 'datetime:d M H:i',
