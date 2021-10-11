@@ -27,7 +27,7 @@ class SupportTicketsNotificationsServiceProvider extends PackageServiceProvider
 
     public function register()
     {
-        parent ::register() ;
+        parent::register() ;
         $this->app->register(EventServiceProvider::class);
     }
 }

@@ -17,7 +17,7 @@
             if ($this -> input('type') === 'fixe') {
                 $this -> merge([ 'priority' => 5 , ]);
             }
-            $this -> merge([ 'author_id' => \Auth ::id() ,
+            $this -> merge([ 'author_id' => \Auth::id() ,
 
                              ]);
         }
@@ -34,7 +34,7 @@
                 'description' => [ 'required' ] ,
                 'type' => [
                     'required' ,
-                    Rule ::in([ 'fixe' , 'help' , 'feature' ]),
+                    Rule::in([ 'fixe' , 'help' , 'feature' ]),
                 ] ,
                 'priority' => [
                     'nullable' ,

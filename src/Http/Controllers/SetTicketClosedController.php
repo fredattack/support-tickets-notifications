@@ -11,6 +11,6 @@
         {
             $ticket -> update([ 'status' => 'closed' ]);
 
-            return \Response ::json([ 'data' => $ticket ]);
+            return \Response::json([ 'data' => $ticket ]);
         }
     }

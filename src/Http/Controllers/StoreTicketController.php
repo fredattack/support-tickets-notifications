@@ -13,7 +13,7 @@
         {
             $validated_request = $request -> validated();
 
-            $ticket = TicketSupport ::create($validated_request);
+            $ticket = TicketSupport::create($validated_request);
 
             if ($request -> has('attachments')) {
                 foreach ($request -> attachments as $file) {
@@ -24,6 +24,6 @@
             }
             event(new TicketCreated($ticket));
 
-            return \Response ::json([ 'data' => $ticket -> load([ 'author' , 'messages' , 'messages.author' ]) ], 201);
+            return \Response::json([ 'data' => $ticket -> load([ 'author' , 'messages' , 'messages.author' ]) ], 201);
         }
     }
