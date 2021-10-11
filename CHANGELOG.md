@@ -2,6 +2,11 @@
 
 All notable changes to `support-tickets-notifications` will be documented in this file.
 
+## 1.0.3 - 2021-10-11
+
+- fix minor bug
+ 
+
 ## 1.0.2 - 2021-10-11
 
 - Add icon read on message

@@ -44,13 +44,16 @@
         public function isMessagesReaded ( TicketSupport $ticket )
         {
             ray () -> clearScreen ();
-            $ticket -> messages () -> each ( function ( $message ) {
+            
+            $ticket -> messages () -> each ( function ( $message ) use ($ticket) {
               
                 if ( $message -> author -> hasRole ( 'super-admin' ) ) {
-                    $is_read_by_author = $message -> readers
-                            -> where ( 'pivot.user_id' , $message -> author_id )
+                    
+                    $is_read_by_ticket_author = $message -> readers
+                            -> where ( 'pivot.user_id' , $ticket -> author_id )
                             -> count () > 0;
-                    $message -> read = $is_read_by_author;
+
+                    $message -> read = $is_read_by_ticket_author;
                   
                 } else {
                     $is_read_by_ADDF = $message -> readers
