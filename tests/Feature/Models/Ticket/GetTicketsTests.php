@@ -10,7 +10,7 @@
         /** @test */
         public function it_can_get_all_tickets()
         {
-            Ticket ::factory() -> count(20) -> create();
+            Ticket::factory() -> count(20) -> create();
 
             $this -> get('/support-tickets/ticket')
                 -> assertOk()

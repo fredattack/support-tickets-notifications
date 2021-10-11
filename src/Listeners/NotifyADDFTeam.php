@@ -28,23 +28,23 @@
                 $list_mail = array_filter(config('support-tickets-notifications.send_email_to'), function ($email) {
                     return filter_var($email, FILTER_VALIDATE_EMAIL);
                 }) ;
-                Mail ::to($list_mail)  -> send(new NewTicketEmail($event -> ticket));
+                Mail::to($list_mail)  -> send(new NewTicketEmail($event -> ticket));
             }
         }
 
         public function SendSlackForNewTicket(TicketCreated $event): void
         {
             if (in_array($event -> ticket -> type, config('support-tickets-notifications.send_slack_for_type'))) {
-                config('support-tickets-notifications.user_class') ::Role('super-admin')
+                config('support-tickets-notifications.user_class')::Role('super-admin')
                     -> first()
-                    -> notify(new NewTicketSlackNotification($event -> ticket, \Auth ::user()));
+                    -> notify(new NewTicketSlackNotification($event -> ticket, \Auth::user()));
             }
         }
 
         public function SendSlackForNewMessage(MessageSended $event): void
         {
-            config('support-tickets-notifications.user_class') ::Role('super-admin')
+            config('support-tickets-notifications.user_class')::Role('super-admin')
                     -> first()
-                    -> notify(new MessageSendedSlackNotification($event -> message, \Auth ::user()));
+                    -> notify(new MessageSendedSlackNotification($event -> message, \Auth::user()));
         }
     }

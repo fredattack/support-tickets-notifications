@@ -15,7 +15,7 @@
 
             $validated_request[ 'ticket_id' ] = $ticket_id;
 
-            $message = MessageSupport ::create($validated_request);
+            $message = MessageSupport::create($validated_request);
 
             if ($request -> has('attachments')) {
                 foreach ($request -> attachments as $file) {
@@ -29,6 +29,6 @@
             event(new MessageSended($message));
 //            }
 
-            return \Response ::json([ 'data' => $message ], 201);
+            return \Response::json([ 'data' => $message ], 201);
         }
     }

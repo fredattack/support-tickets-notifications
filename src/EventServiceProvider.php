@@ -25,6 +25,6 @@
          */
         public function boot(): void
         {
-            parent ::boot();
+            parent::boot();
         }
     }

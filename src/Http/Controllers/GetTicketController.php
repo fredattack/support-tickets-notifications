@@ -1,67 +1,66 @@
 <?php
-    
+
     namespace Fredattack\SupportTicketsNotifications\Http\Controllers;
-    
+
     use Fredattack\SupportTicketsNotifications\Models\TicketSupport;
     use Illuminate\Routing\Controller;
-    
+
     class GetTicketController extends Controller
     {
-        public function __invoke ( TicketSupport $ticket )
+        public function __invoke(TicketSupport $ticket)
         {
-            $this -> setTicketInProgress ( $ticket );
-            
-            $this -> markTicketRead ( $ticket );
-            
-            $ticket -> load ( [ 'author' , 'messages' , 'messages.author' , 'messages.readers' , 'messages.media' , 'media' ] );
-            
-            $this -> markMessagesRead ( $ticket );
-            
-            $ticket = $this -> isMessagesReaded ( $ticket );
-            
-            ray ( $ticket -> messages );
-            
-            return \Response ::json ( [ 'ticket' => $ticket , 'auth' => \Auth ::user () ] );
+            $this -> setTicketInProgress($ticket);
+
+            $this -> markTicketRead($ticket);
+
+            $ticket -> load([ 'author' , 'messages' , 'messages.author' , 'messages.readers' , 'messages.media' , 'media' ]);
+
+            $this -> markMessagesRead($ticket);
+
+            $ticket = $this -> isMessagesReaded($ticket);
+
+            ray($ticket -> messages);
+
+            return \Response::json([ 'ticket' => $ticket , 'auth' => \Auth::user() ]);
         }
-        
-        public function setTicketInProgress ( TicketSupport $ticket ) : void
+
+        public function setTicketInProgress(TicketSupport $ticket): void
         {
-            if ( \Auth ::user () -> hasRole ( 'super-admin' ) && $ticket -> status === 'open' ) {
-                $ticket -> update ( [ 'status' => 'in progress' ] );
+            if (\Auth::user() -> hasRole('super-admin') && $ticket -> status === 'open') {
+                $ticket -> update([ 'status' => 'in progress' ]);
             }
         }
-        
-        public function markTicketRead ( TicketSupport $ticket ) : void
+
+        public function markTicketRead(TicketSupport $ticket): void
         {
-            $ticket -> readers () -> syncWithoutDetaching ( [ \Auth ::id () ] );
+            $ticket -> readers() -> syncWithoutDetaching([ \Auth::id() ]);
         }
-        
-        public function markMessagesRead ( TicketSupport $ticket ) : void
+
+        public function markMessagesRead(TicketSupport $ticket): void
         {
-            $ticket -> messages () -> each ( fn ( $message ) => $message -> readers () -> syncWithoutDetaching ( [ \Auth ::id () ] ) );
+            $ticket -> messages() -> each(fn ($message) => $message -> readers() -> syncWithoutDetaching([ \Auth::id() ]));
         }
-        
-        public function isMessagesReaded ( TicketSupport $ticket )
+
+        public function isMessagesReaded(TicketSupport $ticket)
         {
-            ray () -> clearScreen ();
-            $ticket -> messages () -> each ( function ( $message ) {
-              
-                if ( $message -> author -> hasRole ( 'super-admin' ) ) {
+            ray() -> clearScreen();
+            $ticket -> messages() -> each(function ($message) {
+                if ($message -> author -> hasRole('super-admin')) {
                     $is_read_by_author = $message -> readers
-                            -> where ( 'pivot.user_id' , $message -> author_id )
-                            -> count () > 0;
+                            -> where('pivot.user_id', $message -> author_id)
+                            -> count() > 0;
                     $message -> read = $is_read_by_author;
-                  
                 } else {
                     $is_read_by_ADDF = $message -> readers
-                        -> filter ( fn ( $user ) => $user -> hasRole ( 'super-admin' ) )
-                        -> count ();
-                    
+                        -> filter(fn ($user) => $user -> hasRole('super-admin'))
+                        -> count();
+
                     $message -> read = $is_read_by_ADDF;
                 }
-                
-                    $message -> save ();
+
+                $message -> save();
             });
+
             return $ticket;
         }
     }
